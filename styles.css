@@ -201,7 +201,7 @@ eyebrow {
 
 .hero-visual {
   position: relative;
-  min-height: 520px;
+  min-height: 380px;
   border-radius: var(--radius);
   overflow: hidden;
   background: linear-gradient(180deg, rgba(12, 48, 88, 0.35), rgba(5, 12, 28, 0.68)),
@@ -403,7 +403,8 @@ eyebrow {
     max-width: 980px;
     width: 100%;
     position: relative;
-    overflow: hidden;
+    max-height: 90vh;
+    overflow-y: auto;
     background: rgba(6, 20, 43, 0.95);
     padding: 2rem;
   }
@@ -444,7 +445,7 @@ eyebrow {
 
 .about-copy {
   display: grid;
-  gap: 1.25rem;
+  gap: 2rem;
 }
 
 .about-copy p {
@@ -458,7 +459,7 @@ eyebrow {
   padding: 0;
   margin: 1rem 0 0;
   display: grid;
-  gap: 0.85rem;
+  gap: 1.2rem;
 }
 
 .skills-list li,
@@ -484,10 +485,24 @@ eyebrow {
   position: relative;
   border-radius: var(--radius);
   overflow: hidden;
-  min-height: 480px;
-  background: linear-gradient(180deg, rgba(47, 81, 141, 0.42), rgba(9, 18, 36, 0.92)),
-              url("assets/images/about.jpg") center/cover no-repeat;
+  min-height: 320px;
   box-shadow: var(--shadow);
+}
+
+.avatar-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.avatar-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(47, 81, 141, 0.42), rgba(9, 18, 36, 0.92));
+  pointer-events: none;
+  z-index: 1;
 }
 
 .avatar-card::after {
@@ -495,6 +510,8 @@ eyebrow {
   position: absolute;
   inset: 0;
   background: radial-gradient(circle at 30% 20%, rgba(78, 168, 255, 0.18), transparent 28%);
+  pointer-events: none;
+  z-index: 2;
 }
 
 .contact-panel {
