@@ -21,22 +21,68 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
+  // Mouse follow lighting effect for cards
+  document.querySelectorAll('.feature-card, .project-card').forEach(card => {
+    const lightSpot = document.createElement('div');
+    lightSpot.className = 'light-spot';
+    card.appendChild(lightSpot);
+
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      lightSpot.style.left = `${x - 100}px`;
+      lightSpot.style.top = `${y - 100}px`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      lightSpot.style.opacity = '0';
+    });
+
+    card.addEventListener('mouseenter', () => {
+      lightSpot.style.opacity = '1';
+    });
+  });
+
+  // Enhanced scroll animations with stagger
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
           entry.target.classList.add("visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.2 }
-  );
+        }, index * 100);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
 
   document.querySelectorAll(".hero-anim, .fade-up").forEach((section) => {
     observer.observe(section);
   });
 
+  // Smooth parallax effect for hero
+  let lastScrollY = window.scrollY;
+  const heroVisual = document.querySelector('.hero-visual');
+
+  window.addEventListener('scroll', () => {
+    const currentScrollY = window.scrollY;
+    const deltaY = currentScrollY - lastScrollY;
+
+    if (heroVisual && currentScrollY < window.innerHeight) {
+      const translateY = currentScrollY * 0.3;
+      heroVisual.style.transform = `translateY(${translateY}px)`;
+    }
+
+    lastScrollY = currentScrollY;
+  });
+
+  // Enhanced modal functionality
   const modal = document.querySelector(".project-modal");
   const modalTitle = document.querySelector(".project-modal__title");
   const modalDesc = document.querySelector(".project-modal__desc");
@@ -59,10 +105,16 @@ document.addEventListener("DOMContentLoaded", function () {
         const img = document.createElement("img");
         img.src = src.trim();
         img.alt = title;
+        img.loading = "lazy";
         modalImages.appendChild(img);
       });
       modal.classList.add("open");
       document.body.style.overflow = "hidden";
+
+      // Animate modal entrance
+      setTimeout(() => {
+        modal.style.transform = 'scale(1)';
+      }, 10);
     });
   });
 
@@ -72,7 +124,31 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   function closeModal() {
-    modal.classList.remove("open");
-    document.body.style.overflow = "";
+    modal.style.transform = 'scale(0.95)';
+    setTimeout(() => {
+      modal.classList.remove("open");
+      document.body.style.overflow = "";
+      modal.style.transform = '';
+    }, 200);
   }
+
+  // Keyboard navigation for accessibility
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal?.classList.contains('open')) {
+      closeModal();
+    }
+  });
+
+  // Performance optimization: throttle scroll events
+  let scrollTimeout;
+  const throttledScroll = () => {
+    if (!scrollTimeout) {
+      scrollTimeout = setTimeout(() => {
+        // Handle scroll-based animations here if needed
+        scrollTimeout = null;
+      }, 16); // ~60fps
+    }
+  };
+
+  window.addEventListener('scroll', throttledScroll, { passive: true });
 });
