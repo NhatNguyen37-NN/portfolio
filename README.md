@@ -1,5 +1,5 @@
 
-# PROMPT CHATGPT ĐƯA
+# PROMPT CHATGPT BAN ĐẦU
 
 Create a complete, professional multi-page portfolio website for a graphic designer.
 
@@ -98,3 +98,92 @@ Enhance navigation:
 - Add smooth page transitions (fade or slide)
 - Highlight active menu item
 - Ensure fast loading and seamless UX
+
+# PROMPT ĐỂ GIAO DIỆN PHÙ HỢP VỚI NHIỀU THIẾT BỊ
+Make the website fully responsive across all devices:
+- Mobile (320px and up)
+- Tablet (768px and up)
+- Desktop (1024px and up)
+
+Responsive requirements:
+- Use flexible layouts (Flexbox or CSS Grid)
+- Use relative units (%, rem, em) instead of fixed px where appropriate
+- Ensure text scales properly on smaller screens
+- Navigation should adapt (stack or collapse on mobile)
+- Sections should stack vertically on mobile
+- Project cards should switch from grid (desktop) to single column (mobile)
+
+Design behavior:
+- Maintain consistent spacing and alignment across screen sizes
+- Ensure buttons are easily clickable on mobile (minimum 44px height)
+- Avoid horizontal scrolling
+- Optimize padding and margins for smaller screens
+
+Images and layout:
+- Images should scale properly without distortion
+- Use max-width: 100% for media
+- Maintain aspect ratios
+
+Theme toggle:
+- Ensure the toggle button is accessible and properly positioned on all screen sizes
+
+Output:
+- Include media queries for breakpoints
+- Clean, maintainable CSS structure
+
+# PROMPT ĐỂ TRANG WEB XỊN HƠN
+Trong trang có những hiệu ứng này:
+- nền tối
+- blur
+- glow nhẹ
+- hover lift
+- animation chậm
+- spacing rộng
+- WEB LẤY Ý TƯỞNG: Awwwards, Godly Website Collection, Mobbin, Refero.
+
+  
+Make my portfolio website look more modern, premium, and interactive.
+
+Style:
+- Dark modern UI
+- Minimal but futuristic
+- Smooth animations
+- Clean spacing and typography
+- Apple + Awwwards inspired design
+- Soft glow effects
+- Professional creative developer/designer portfolio vibe
+
+Add these effects and improvements:
+- Smooth hover animations on cards and buttons
+- Glowing border effect on hover
+- Animated gradient border or light sweep effect
+- Mouse-follow lighting effect on cards
+- Smooth fade-in and slide-up animations while scrolling
+- Slight floating/parallax effects
+- Glassmorphism blur panels
+- Better shadows and depth
+- Smooth page transitions
+- Responsive design for mobile and desktop
+- Improve navbar interactions
+- Add subtle animated background particles or gradients
+- Improve project showcase section with modern layout
+- Add animated active states when hovering
+
+Animation style:
+- Smooth and elegant
+- Not too fast
+- Premium feeling
+- Avoid overly flashy effects
+
+Performance:
+- Keep animations optimized and lightweight
+- Compress large images
+- Improve loading speed
+
+Important:
+- Keep the website clean and professional
+- Do not overcrowd the UI
+- Maintain readability and accessibility
+- Use modern CSS techniques
+- Use reusable components
+- Preserve existing content and structure while upgrading the visual design
