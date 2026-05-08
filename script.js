@@ -2,19 +2,48 @@ document.addEventListener("DOMContentLoaded", function () {
   const body = document.body;
   const links = document.querySelectorAll("a.page-link");
   const navLinks = document.querySelectorAll(".nav-links a");
+  const sectionLinks = document.querySelectorAll("main section[id]");
 
-  navLinks.forEach((link) => {
-    if (link.href === window.location.href || window.location.pathname.endsWith(link.getAttribute("href"))) {
-      link.classList.add("active");
-    }
-  });
+  const refreshNavActive = () => {
+    const scrollPosition = window.scrollY + window.innerHeight * 0.35;
+    let currentSection = sectionLinks.length ? sectionLinks[0].id : null;
+
+    sectionLinks.forEach((section) => {
+      if (section.offsetTop <= scrollPosition) {
+        currentSection = section.id;
+      }
+    });
+
+    navLinks.forEach((link) => {
+      const href = link.getAttribute("href");
+      if (href && href.startsWith("#") && currentSection) {
+        link.classList.toggle("active", href === `#${currentSection}`);
+      } else {
+        link.classList.toggle("active", link.href === window.location.href || window.location.pathname.endsWith(href || ""));
+      }
+    });
+  };
+
+  refreshNavActive();
+  window.addEventListener("scroll", refreshNavActive, { passive: true });
 
   links.forEach((link) => {
     link.addEventListener("click", function (event) {
       if (link.target === "_blank" || link.href.startsWith("mailto:")) return;
+      const href = link.getAttribute("href");
+      if (href && href.startsWith("#")) {
+        event.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+          window.history.pushState(null, "", href);
+        }
+        return;
+      }
+
       event.preventDefault();
       body.classList.add("fade-exit");
-      const nextUrl = link.getAttribute("href");
+      const nextUrl = href;
       setTimeout(() => {
         window.location.href = nextUrl;
       }, 260);
@@ -66,18 +95,14 @@ document.addEventListener("DOMContentLoaded", function () {
     observer.observe(section);
   });
 
-  // Smooth parallax effect for hero
+  // Smooth parallax effect for the hero visual
   let lastScrollY = window.scrollY;
-  const heroVisual = document.querySelector('.hero-visual');
+  const heroVisual = document.querySelector('.featured-visual');
 
   window.addEventListener('scroll', () => {
     const currentScrollY = window.scrollY;
-    const deltaY = currentScrollY - lastScrollY;
 
-    if (heroVisual && currentScrollY < window.innerHeight) {
-      const translateY = currentScrollY * 0.3;
-      heroVisual.style.transform = `translateY(${translateY}px)`;
-    }
+    // Parallax effect removed as per user request
 
     lastScrollY = currentScrollY;
   });
