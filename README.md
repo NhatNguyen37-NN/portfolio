@@ -92,13 +92,6 @@ Output:
 - One shared CSS file
 - Clean, well-organized code
 
-# PROMPT THÊM ĐỂ CHUYỂN TRANG MƯỢT HƠN
-
-Enhance navigation:
-- Add smooth page transitions (fade or slide)
-- Highlight active menu item
-- Ensure fast loading and seamless UX
-
 # PROMPT ĐỂ GIAO DIỆN PHÙ HỢP VỚI NHIỀU THIẾT BỊ
 Make the website fully responsive across all devices:
 - Mobile (320px and up)
